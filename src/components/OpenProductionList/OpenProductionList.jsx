@@ -8,7 +8,11 @@ const OpenProductionList = ({ list, getAll }) => (
     <h2>
       Open Production Runs
     </h2>
-      {list.map((item) => <OpenProduction key={item.id.toString()} item={item} getAll={getAll}/>)}
+      {list.map((item) => item.openBool === 1 ? <OpenProduction key={item.id.toString()} item={item} getAll={getAll}/>: null)}
+    <h2>
+      Closed Production Runs
+    </h2>
+      {list.map((item) => item.openBool === 0 ? <OpenProduction key={item.id.toString()} item={item} getAll={getAll}/>: null)}
   </div>
 )
 

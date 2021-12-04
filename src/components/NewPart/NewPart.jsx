@@ -8,6 +8,7 @@ class NewPart extends React.Component {
     this.state = {
       editInput: false,
       newETD: '',
+      received: this.props.part.received
     }
   }
 
@@ -39,6 +40,15 @@ class NewPart extends React.Component {
     .then(() => this.props.getAll());
   }
 
+  handleReceived() {
+    axios.patch('/updateReceived', {
+      partId: this.props.part.id,
+      received: !this.state.received
+    })
+    .then(()=> this.setState({received: !this.state.received}))
+    .then(()=> this.props.getParts());
+  }
+
   render() {
     return(
       <li>
@@ -51,7 +61,7 @@ class NewPart extends React.Component {
         {this.props.part.etd.slice(0,10).split('-').join('/')}
         {' | '}
         <label htmlFor='received'>Received</label>
-        <input type='checkbox' id='received'/>
+        <input type='checkbox' id='received' checked={this.state.received} onChange={() => this.handleReceived()}/>
         {' | '}
         {this.state.editInput?
         <div>
@@ -64,7 +74,7 @@ class NewPart extends React.Component {
 
     )
   }
-};
+}
 
 // NewPart.propTypes = {
 //   part: PropTypes.number

@@ -2,7 +2,7 @@ const db = require('../../db/index.js').dbConnection;
 
 const dbHandler = {
   openProductionList: (req, callback) => {
-    db.query('SELECT * FROM productionRun WHERE openBool = 1', (err, data) => {
+    db.query('SELECT * FROM productionRun', (err, data) => {
       if(err) {
         callback(err, null);
       } else {
@@ -16,6 +16,7 @@ const dbHandler = {
       if(err) {
         callback(err, null);
       } else {
+
         callback(null, data);
       }
     })
@@ -78,6 +79,26 @@ const dbHandler = {
     const formattedNewProductionETD = newProductionETD.getFullYear() + "-" + (newProductionETD.getMonth()+1) + "-" + newProductionETD.getDate();
     const reqProductionParams = [formattedNewProductionETD, req.body.product_id];
     db.query('UPDATE productionRun SET etd = ? WHERE id = ?', reqProductionParams, (err)=> {
+      if(err) {
+        callback(err);
+      } else {
+        callback(null);
+      }
+    })
+  },
+  updateReceived: (req, callback) => {
+    const reqParams = [req.body.received === true ? '1' : '0', req.body.partId];
+    db.query('UPDATE parts SET received = ? WHERE id = ?', reqParams, (err) => {
+      if(err) {
+        callback(err);
+      } else {
+        callback(null);
+      }
+    })
+  },
+  updateBool: (req, callback) => {
+    const reqParams = [req.body.openBool, req.body.id];
+    db.query('UPDATE productionRun SET openBool = ? WHERE id = ?', reqParams, (err) => {
       if(err) {
         callback(err);
       } else {
