@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NewPart from '../NewPart/NewPart.jsx';
+import sampleData from '../../../sampleData/sampleData.js';
 
 class OpenProduction extends React.Component {
   constructor(props) {
@@ -26,15 +27,15 @@ class OpenProduction extends React.Component {
         Product Name :
         {' '}
         {this.props.item.productName}
-        {' '}
+        {' | '}
         Estimated Delivery Date :
         {' '}
-        {this.props.item.prodStartDate.slice(0,10).split('-').join('/')}
-        {' '}
+        {this.props.item.etd.slice(0,10).split('-').join('/')}
+        {' | '}
         <button onClick={() => this.expandHandler()}>{this.state.expand ? "Collapse" : "Expand"}</button>
         {this.state.expand ?
           <ul>
-            {this.state.partList.map((part) => <NewPart part={part}/>)}
+            {sampleData.openPartsList.map((part) => <NewPart part={part}/>)}
           </ul> : null
         }
       </div>

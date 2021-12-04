@@ -21,9 +21,9 @@ class App extends React.Component {
       <div className={styles.titleSection}>
         <h1>Production Manager</h1>
         <NewProduction/>
-        <NewItem/>
-        <OpenProductionList list={sampleData}/>
-        <UpcomingProductionList list={this.state.upcomingProductionList}/>
+        {/* <NewItem/> */}
+        <OpenProductionList list={sampleData.openProductionList}/>
+        {/* <UpcomingProductionList list={this.state.upcomingProductionList}/> */}
       </div>
     )
   }
