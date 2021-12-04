@@ -16,10 +16,10 @@ const NewPart = ({part}) => (
     {' | '}
     <button>Edit</button>
   </li>
-)
+);
 
-NewPart.propTypes = {
-  part: PropTypes.number
-}
+// NewPart.propTypes = {
+//   part: PropTypes.number
+// }
 
 export default NewPart;

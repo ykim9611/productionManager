@@ -1,8 +1,17 @@
 const dbHandler = require('../Model/index.js').dbHandler;
 
 const requestHandler = {
-  test: (req, res) => {
-    dbHandler.test(req, (err, data) => {
+  openProductionList: (req, res) => {
+    dbHandler.openProductionList(req, (err, data) => {
+      if(err) {
+        res.sendStatus(400);
+      } else {
+        res.send(data);
+      }
+    })
+  },
+  partsList: (req, res) => {
+    dbHandler.partsList(req, (err, data) => {
       if(err) {
         res.sendStatus(400);
       } else {
