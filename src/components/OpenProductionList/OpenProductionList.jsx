@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import OpenProduction from '../OpenProduction/OpenProduction.jsx'
 
 const OpenProductionList = ({ list }) => (
-  <ul>
-    Open Production Runs
-    {list.map((item) => <OpenProduction item={item}/>)}
-  </ul>
+  <div>
+    <h2>
+      Open Production Runs
+    </h2>
+      {list.map((item) => <OpenProduction key={item.id.toString()} item={item}/>)}
+  </div>
 )
 
-OpenProductionList.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.number)
-}
+// OpenProductionList.propTypes = {
+//   list: PropTypes.arrayOf(PropTypes.number)
+// }
 
 export default OpenProductionList;

@@ -4,6 +4,7 @@ import NewItem from './NewItem/NewItem.jsx';
 import NewProduction from './NewProduction/NewProduction.jsx';
 import OpenProductionList from './OpenProductionList/OpenProductionList.jsx';
 import UpcomingProductionList from './UpcomingProductionList/UpcomingProductionList.jsx';
+import sampleData from '../../sampleData/sampleData.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,12 +16,13 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(sampleData);
     return (
       <div className={styles.titleSection}>
         <h1>Production Manager</h1>
-        <NewItem/>
         <NewProduction/>
-        <OpenProductionList list={this.state.openProductionList}/>
+        <NewItem/>
+        <OpenProductionList list={sampleData}/>
         <UpcomingProductionList list={this.state.upcomingProductionList}/>
       </div>
     )
