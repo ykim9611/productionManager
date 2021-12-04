@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import NewPart from '../NewPart/NewPart.jsx';
 import sampleData from '../../../sampleData/sampleData.js';
 
@@ -8,7 +9,7 @@ class OpenProduction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      partList: [9,10,11,12],
+      partsList: [],
       expand: false,
     }
   }
@@ -16,8 +17,12 @@ class OpenProduction extends React.Component {
   //make axios request for parts for specific id
 
   expandHandler() {
-    this.setState({
-      expand: !this.state.expand
+    axios.get(`/partsList/${this.props.item.id}`)
+    .then(({data}) => {
+      this.setState({
+        expand: !this.state.expand,
+        partsList: data
+      })
     })
   }
 
@@ -35,7 +40,7 @@ class OpenProduction extends React.Component {
         <button onClick={() => this.expandHandler()}>{this.state.expand ? "Collapse" : "Expand"}</button>
         {this.state.expand ?
           <ul>
-            {sampleData.openPartsList.map((part) => <NewPart part={part}/>)}
+            {this.state.partsList.map((part) => <NewPart key={part.id.toString()} part={part}/>)}
           </ul> : null
         }
       </div>
