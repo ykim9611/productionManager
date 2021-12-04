@@ -18,6 +18,15 @@ const requestHandler = {
         res.send(data);
       }
     })
+  },
+  addNewProductionRun: (req, res) => {
+    dbHandler.addNewProductionRun(req, (err)=> {
+      if(err) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(200);
+      }
+    })
   }
 }
 

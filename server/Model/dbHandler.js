@@ -19,6 +19,39 @@ const dbHandler = {
         callback(null, data);
       }
     })
+  },
+  addNewProductionRun: (req, callback) => {
+    const longestLeadTime = Number(req.body.parts.sort((a,b)=> b.leadTime - a.leadTime)[0].leadTime);
+    const date = new Date();
+    const etdDate = new Date(new Date().getTime()+((longestLeadTime + 7)*24*60*60*1000));
+    const formattedDate =  date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+    const formattedEtdDate = etdDate.getFullYear() + "-" + (etdDate.getMonth()+1) + "-" + etdDate.getDate();
+    const productionQuery = `INSERT INTO productionRun (productName, annualSales, prodStartDate, openBool, etd) VALUES ('${req.body.productName}', ${req.body.annualSales}, '${formattedDate}', 1, '${formattedEtdDate}')`;
+    db.query(productionQuery, (err, data) => {
+      if(err) {
+        callback(err, null);
+      } else {
+        var partsQuery = `INSERT INTO parts (product_id, partName, etd, received) VALUES `;
+        for(var i = 0; i < req.body.parts.length; i++) {
+          const currentPart = req.body.parts[i];
+          const partEtdDate = new Date(new Date().getTime()+(currentPart.leadTime*24*60*60*1000));
+          const formattedPartEtdDate = partEtdDate.getFullYear() + "-" + (partEtdDate.getMonth()+1) + "-" + partEtdDate.getDate();
+          partsQuery += `('${data.insertId}', '${currentPart.partsName}', '${formattedPartEtdDate}', '0')`;
+          if(i === req.body.parts.length - 1) {
+            partsQuery += ';';
+          } else {
+            partsQuery += ', ';
+          }
+        }
+        db.query(partsQuery, (err)=> {
+          if(err) {
+            callback(err);
+          } else {
+            callback(null);
+          }
+        })
+      }
+    })
   }
 };
 

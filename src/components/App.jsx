@@ -16,6 +16,10 @@ class App extends React.Component {
     };
   }
   componentDidMount() {
+    this.getOpenProductionList();
+  }
+
+  getOpenProductionList() {
     axios.get('/openProductionList')
     .then(({data}) => {
       this.setState({
@@ -24,14 +28,13 @@ class App extends React.Component {
     })
   }
 
-
   render() {
     return (
       <div className={styles.titleSection}>
         <h1>Production Manager</h1>
-        <NewProduction/>
+        <NewProduction getAll={this.getOpenProductionList.bind(this)}/>
         {/* <NewItem/> */}
-        <OpenProductionList list={this.state.openProductionList}/>
+        <OpenProductionList list={this.state.openProductionList} />
         {/* <UpcomingProductionList list={this.state.upcomingProductionList}/> */}
       </div>
     )
