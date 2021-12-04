@@ -40,12 +40,13 @@ class NewPart extends React.Component {
     .then(() => this.props.getAll());
   }
 
-  handleReceived(event) {
+  handleReceived() {
     axios.patch('/updateReceived', {
       partId: this.props.part.id,
       received: !this.state.received
     })
-    .then(()=> this.setState({received: !this.state.received}));
+    .then(()=> this.setState({received: !this.state.received}))
+    .then(()=> this.props.getParts());
   }
 
   render() {
@@ -60,7 +61,7 @@ class NewPart extends React.Component {
         {this.props.part.etd.slice(0,10).split('-').join('/')}
         {' | '}
         <label htmlFor='received'>Received</label>
-        <input type='checkbox' id='received' checked={this.state.received} onChange={(event) => this.handleReceived(event)}/>
+        <input type='checkbox' id='received' checked={this.state.received} onChange={() => this.handleReceived()}/>
         {' | '}
         {this.state.editInput?
         <div>

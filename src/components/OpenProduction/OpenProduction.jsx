@@ -14,16 +14,19 @@ class OpenProduction extends React.Component {
     }
   }
 
-  //make axios request for parts for specific id
-
   getParts() {
     axios.get(`/partsList/${this.props.item.id}`)
     .then(({data}) => {
       this.setState({
         partsList: data
       })
+      return data;
+    })
+    .then((data)=> {
+      this.updateOpenBool(data);
     })
   }
+
   expandHandler() {
     axios.get(`/partsList/${this.props.item.id}`)
     .then(({data}) => {
@@ -31,9 +34,22 @@ class OpenProduction extends React.Component {
         expand: !this.state.expand,
         partsList: data
       })
+      return data;
+    })
+    .then((data)=> {
+      this.updateOpenBool(data);
     })
   }
-
+  updateOpenBool(data) {
+      data.every((part) => part.received === 1) ? data.openBool = 0 : data.openBool = 1;
+      if(this.props.item.openBool !== data.openBool) {
+        axios.patch('/updateBool', {
+          openBool: data.openBool,
+          id: this.props.item.id
+        })
+        .then(()=> this.props.getAll());
+      }
+    }
   render() {
     return (
       <div>

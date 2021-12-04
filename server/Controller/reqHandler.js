@@ -54,6 +54,15 @@ const requestHandler = {
         res.sendStatus(202);
       }
     })
+  },
+  updateBool: (req, res) => {
+    dbHandler.updateBool(req, (err) => {
+      if(err) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(202);
+      }
+    })
   }
 }
 
