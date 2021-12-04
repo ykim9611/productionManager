@@ -84,6 +84,17 @@ const dbHandler = {
         callback(null);
       }
     })
+  },
+  updateReceived: (req, callback) => {
+    const reqParams = [req.body.received === true ? '1' : '0', req.body.partId];
+    console.log(reqParams);
+    db.query('UPDATE parts SET received = ? WHERE id = ?', reqParams, (err) => {
+      if(err) {
+        callback(err);
+      } else {
+        callback(null);
+      }
+    })
   }
 };
 

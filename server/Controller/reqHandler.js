@@ -45,6 +45,15 @@ const requestHandler = {
         res.sendStatus(202);
       }
     })
+  },
+  updateReceived: (req, res) => {
+    dbHandler.updateReceived(req, (err)=> {
+      if(err) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(202);
+      }
+    })
   }
 }
 

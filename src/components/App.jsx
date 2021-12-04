@@ -1,18 +1,16 @@
 import React from 'react';
 import styles from './styles.css';
 import axios from 'axios';
-import NewItem from './NewItem/NewItem.jsx';
 import NewProduction from './NewProduction/NewProduction.jsx';
 import OpenProductionList from './OpenProductionList/OpenProductionList.jsx';
 import UpcomingProductionList from './UpcomingProductionList/UpcomingProductionList.jsx';
-import sampleData from '../../sampleData/sampleData.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       openProductionList: [],
-      upcomingProductionList: [5,6,7,8]
+      upcomingProductionList: []
     };
   }
   componentDidMount() {

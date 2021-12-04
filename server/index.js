@@ -17,6 +17,7 @@ app.get('/partsList/:id', requestHandler.partsList);
 app.post('/addNewProductionRun', requestHandler.addNewProductionRun);
 app.patch('/editLeadTime', requestHandler.editLeadTime);
 app.patch('/updateTotalLeadTime', requestHandler.updateTotalLeadTime);
+app.patch('/updateReceived', requestHandler.updateReceived);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
