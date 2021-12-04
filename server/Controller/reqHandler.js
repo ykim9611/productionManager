@@ -27,6 +27,24 @@ const requestHandler = {
         res.sendStatus(200);
       }
     })
+  },
+  editLeadTime: (req, res) => {
+    dbHandler.editLeadTime(req, (err) => {
+      if(err) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(202);
+      }
+    })
+  },
+  updateTotalLeadTime: (req, res) => {
+    dbHandler.updateTotalLeadTime(req, (err)=> {
+      if(err) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(202);
+      }
+    })
   }
 }
 

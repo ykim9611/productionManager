@@ -22,7 +22,6 @@ class NewProduction extends React.Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
@@ -31,8 +30,7 @@ class NewProduction extends React.Component {
   onAddClick(event) {
     this.state.parts.push({partsName: this.state.partsName, leadTime: this.state.leadTime});
     event.preventDefault();
-    this.setState({
-    })
+    this.setState({})
   }
 
   onSubmitClick() {
