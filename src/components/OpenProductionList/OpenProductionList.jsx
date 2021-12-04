@@ -3,12 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OpenProduction from '../OpenProduction/OpenProduction.jsx'
 
-const OpenProductionList = ({ list }) => (
+const OpenProductionList = ({ list, getAll }) => (
   <div>
     <h2>
       Open Production Runs
     </h2>
-      {list.map((item) => <OpenProduction key={item.id.toString()} item={item}/>)}
+      {list.map((item) => <OpenProduction key={item.id.toString()} item={item} getAll={getAll}/>)}
   </div>
 )
 

@@ -21,11 +21,7 @@ class App extends React.Component {
 
   getOpenProductionList() {
     axios.get('/openProductionList')
-    .then(({data}) => {
-      this.setState({
-        openProductionList: data
-      })
-    })
+    .then(({data}) => this.setState({openProductionList: data}))
   }
 
   render() {
@@ -34,7 +30,7 @@ class App extends React.Component {
         <h1>Production Manager</h1>
         <NewProduction getAll={this.getOpenProductionList.bind(this)}/>
         {/* <NewItem/> */}
-        <OpenProductionList list={this.state.openProductionList} />
+        <OpenProductionList list={this.state.openProductionList} getAll={this.getOpenProductionList.bind(this)}/>
         {/* <UpcomingProductionList list={this.state.upcomingProductionList}/> */}
       </div>
     )

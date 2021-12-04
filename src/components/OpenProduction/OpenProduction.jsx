@@ -16,6 +16,14 @@ class OpenProduction extends React.Component {
 
   //make axios request for parts for specific id
 
+  getParts() {
+    axios.get(`/partsList/${this.props.item.id}`)
+    .then(({data}) => {
+      this.setState({
+        partsList: data
+      })
+    })
+  }
   expandHandler() {
     axios.get(`/partsList/${this.props.item.id}`)
     .then(({data}) => {
@@ -40,7 +48,7 @@ class OpenProduction extends React.Component {
         <button onClick={() => this.expandHandler()}>{this.state.expand ? "Collapse" : "Expand"}</button>
         {this.state.expand ?
           <ul>
-            {this.state.partsList.map((part) => <NewPart key={part.id.toString()} part={part}/>)}
+            {this.state.partsList.map((part) => <NewPart key={part.id.toString()} part={part} etd={this.props.item.etd.slice(0,10)} getAll={this.props.getAll} getParts={this.getParts.bind(this)}/>)}
           </ul> : null
         }
       </div>

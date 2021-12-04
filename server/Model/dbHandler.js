@@ -12,7 +12,7 @@ const dbHandler = {
   },
   partsList: (req, callback) => {
     const reqParams = [req.params.id, req.params.id];
-    db.query('SELECT parts.id, partName, parts.etd, received FROM productionRun JOIN parts ON productionRun.id = ? AND parts.product_id = ?', reqParams, (err, data) => {
+    db.query('SELECT parts.id, parts.product_id, partName, parts.etd, received FROM productionRun JOIN parts ON productionRun.id = ? AND parts.product_id = ?', reqParams, (err, data) => {
       if(err) {
         callback(err, null);
       } else {
@@ -50,6 +50,38 @@ const dbHandler = {
             callback(null);
           }
         })
+      }
+    })
+  },
+  editLeadTime: (req, callback) => {
+    const reqPartParams = [req.body.newPartETD, req.body.partId];
+    function process(date){
+      var parts = date.split("-");
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+    var totalETD = process(req.body.totalETD);
+    var newPartETD = process(req.body.newPartETD);
+    db.query(`UPDATE parts SET etd = ? WHERE id = ?`, reqPartParams, (err)=> {
+      if(err) {
+        callback(err);
+      } else {
+        callback(null);
+      }
+    })
+  },
+  updateTotalLeadTime: (req, callback) => {
+    function process(date){
+      var parts = date.split("-");
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+    const newProductionETD = new Date(process(req.body.newPartETD).getTime() + (7*24*60*60*1000));
+    const formattedNewProductionETD = newProductionETD.getFullYear() + "-" + (newProductionETD.getMonth()+1) + "-" + newProductionETD.getDate();
+    const reqProductionParams = [formattedNewProductionETD, req.body.product_id];
+    db.query('UPDATE productionRun SET etd = ? WHERE id = ?', reqProductionParams, (err)=> {
+      if(err) {
+        callback(err);
+      } else {
+        callback(null);
       }
     })
   }
