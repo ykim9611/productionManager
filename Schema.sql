@@ -15,6 +15,7 @@ CREATE TABLE productionRun (
 CREATE TABLE parts (
   id INT NOT NULL AUTO_INCREMENT,
   product_id INT NOT NULL,
+  partName VARCHAR(255) NOT NULL,
   eta DATE NOT NULL,
   received BOOLEAN NOT NULL,
   PRIMARY KEY (id)
