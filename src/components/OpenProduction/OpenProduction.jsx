@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import styles from './styles.css';
 import NewPart from '../NewPart/NewPart.jsx';
 import sampleData from '../../../sampleData/sampleData.js';
 
@@ -52,21 +53,24 @@ class OpenProduction extends React.Component {
     }
   render() {
     return (
-      <div>
-        Product Name :
-        {' '}
-        {this.props.item.productName}
-        {' | '}
-        Estimated Delivery Date :
-        {' '}
-        {this.props.item.etd.slice(0,10).split('-').join('/')}
-        {' | '}
-        <button onClick={() => this.expandHandler()}>{this.state.expand ? "Collapse" : "Expand"}</button>
-        {this.state.expand ?
-          <ul>
-            {this.state.partsList.map((part) => <NewPart key={part.id.toString()} part={part} etd={this.props.item.etd.slice(0,10)} getAll={this.props.getAll} getParts={this.getParts.bind(this)}/>)}
-          </ul> : null
-        }
+      <div className={styles.productionItem}>
+        <div>
+          Product Name :
+          {' '}
+          {this.props.item.productName}
+          {' | '}
+          EDD :
+          {' '}
+          {this.props.item.etd.slice(0,10).split('-').join('/')}
+        </div>
+        <div className={styles.eachProduction}>
+          <button className={styles.newProductionButton} onClick={() => this.expandHandler()}>{this.state.expand ? "Collapse" : "Expand"}</button>
+          {this.state.expand ?
+            <div className={styles.parts}>
+              {this.state.partsList.map((part) => <NewPart key={part.id.toString()} part={part} etd={this.props.item.etd.slice(0,10)} getAll={this.props.getAll} getParts={this.getParts.bind(this)}/>)}
+            </div> : null
+          }
+        </div>
       </div>
     )
   }

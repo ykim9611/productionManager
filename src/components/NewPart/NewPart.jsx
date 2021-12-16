@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import styles from './styles.css';
 
 class NewPart extends React.Component {
   constructor(props) {
@@ -51,26 +52,29 @@ class NewPart extends React.Component {
 
   render() {
     return(
-      <li>
-        Part Name :
-        {' '}
-        {this.props.part.partName}
-        {' | '}
-        Estimated Delivery Date :
-        {' '}
-        {this.props.part.etd.slice(0,10).split('-').join('/')}
-        {' | '}
-        <label htmlFor='received'>Received</label>
-        <input type='checkbox' id='received' checked={this.state.received} onChange={() => this.handleReceived()}/>
-        {' | '}
-        {this.state.editInput?
-        <div>
-          <label htmlFor='edit'>Enter new ETD : </label>
-          <input type='date' onChange={()=>this.setNewETD(event)}></input>
-          <button onClick={()=> this.handleEdit()}>Submit</button>
+      <div className={styles.part}>
+        <div className={styles.editLabel}>
+          Part Name:
+          {' '}
+          {this.props.part.partName}
+          {' | '}
+          EDD:
+          {' '}
+          {this.props.part.etd.slice(0,10).split('-').join('/')}
+          {' | '}
+          Received:
+          {' '}
+          <input type='checkbox' id='received' checked={this.state.received} onChange={() => this.handleReceived()}/>
+          {' | '}
         </div>
-        : <button onClick={()=> this.setState({editInput: true})}>Edit</button>}
-      </li>
+        {this.state.editInput?
+        <div className={styles.editForm}>
+          <label className={styles.editLabel} htmlFor='edit'>Enter new ETD : </label>
+          <input type='date' onChange={()=>this.setNewETD(event)}></input>
+          <button className={styles.newProductionButton} onClick={()=> this.handleEdit()}>Submit</button>
+        </div>
+        : <button className={styles.newProductionButton} onClick={()=> this.setState({editInput: true})}>Edit</button>}
+      </div>
 
     )
   }

@@ -1,3 +1,6 @@
 .titleSection {
-  color: blue
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: outset;
 }

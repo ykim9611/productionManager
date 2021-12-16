@@ -1,0 +1,16 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.edd {
+  font-size: medium;
+  font-weight: normal;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

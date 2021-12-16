@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import styles from './styles.css';
 
 class NewProduction extends React.Component {
   constructor(props) {
@@ -55,24 +56,28 @@ class NewProduction extends React.Component {
     return (
       <div>
           {this.state.buttonClicked ?
-              <div>
-                <h3>Add New Production Run</h3>
-                <form>
+              <div className={styles.newProductionForm}>
+                <h3>Enter New Production Run</h3>
+                <form className={styles.form}>
+                  <div className={styles.horizontal}>
                     <label htmlFor='productName'>Product Name : </label>
                     <input type='text' id='productName' name='productName' onChange={() => this.handleInputChange(event)}/><br/>
                     <label htmlFor='annualSales'>Annual Sales # : </label>
                     <input type='text' id='annualSales' name='annualSales' onChange={() => this.handleInputChange(event)}/><br/>
+                  </div>
+                  <div className={styles.horizontal}>
                     Part Name: <input type='text' id='partsName' name='partsName' onChange={() => this.handleInputChange(event)}></input>
                     {' '}
                     Lead Time(days): <input type='text' id='leadTime' name='leadTime' onChange={() => this.handleInputChange(event)}></input>
-                    <button onClick={()=>this.onAddClick(event)}>Add</button>
-                    <ul>
-                        {this.state.parts.map((part)=> <li key={part.partsName}>Part Name: {part.partsName} {' | '} Lead Time: {part.leadTime} days</li>)}
-                    </ul>
-                    <button onClick={()=>this.onSubmitClick()}>Submit</button>
+                    <button className={styles.newProductionButton} onClick={()=>this.onAddClick(event)}>Add</button>
+                  </div>
+                    <div>
+                        {this.state.parts.map((part)=> <div key={part.partsName}>Part Name: {part.partsName} {' | '} Lead Time: {part.leadTime} days</div>)}
+                    </div>
+                    <button className={styles.newProductionButton} onClick={()=>this.onSubmitClick()}>Submit</button>
                 </form>
               </div>
-              : <button onClick={() => this.buttonHandler()}>New Production Run</button>}
+              : <button className={styles.newProductionButton} onClick={() => this.buttonHandler()}>New Production Run</button>}
       </div>
     )
   }
