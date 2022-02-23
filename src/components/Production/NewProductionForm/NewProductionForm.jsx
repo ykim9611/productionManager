@@ -106,6 +106,6 @@ export default function NewProductionForm({ getAll }) {
   );
 }
 
-// NewProductionForm.propTypes = {
-//   getAll: PropTypes.func.isRequired,
-// };
+NewProductionForm.propTypes = {
+  getAll: PropTypes.func.isRequired,
+};

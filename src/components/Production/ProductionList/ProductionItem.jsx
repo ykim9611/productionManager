@@ -76,7 +76,7 @@ export default function ProductionItem({ item, getAll }) {
   );
 }
 
-// ProductionItem.propTypes = {
-//   item: PropTypes.object.isRequired,
-//   getAll: PropTypes.func.isRequired,
-// };
+ProductionItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  getAll: PropTypes.func.isRequired,
+};

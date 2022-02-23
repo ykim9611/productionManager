@@ -35,9 +35,9 @@ const ProductionList = ({ list, getAll }) => (
   </div>
 );
 
-// ProductionList.propTypes = {
-//   list: PropTypes.array.isRequired,
-//   getAll: PropTypes.func.isRequired,
-// };
+ProductionList.propTypes = {
+  list: PropTypes.array.isRequired,
+  getAll: PropTypes.func.isRequired,
+};
 
 export default ProductionList;

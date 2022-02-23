@@ -71,11 +71,11 @@ function Part({ part, etd, getAll, getParts }) {
   );
 }
 
-// Part.propTypes = {
-//   part: PropTypes.object.isRequired,
-//   etd: PropTypes.string.isRequired,
-//   getAll: PropTypes.func.isRequired,
-//   getParts: PropTypes.func.isRequired,
-// };
+Part.propTypes = {
+  part: PropTypes.object.isRequired,
+  etd: PropTypes.string.isRequired,
+  getAll: PropTypes.func.isRequired,
+  getParts: PropTypes.func.isRequired,
+};
 
 export default Part;
