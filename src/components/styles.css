@@ -4,3 +4,17 @@
   align-items: center;
   border-style: outset;
 }
+
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+nav {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+  font-size: larger;
+}
