@@ -1,25 +1,25 @@
 /* eslint-disable no-undef */
-const express = require('express')
-const app = express()
-const port = 3000
-const requestHandler = require('./Controller/index.js').requestHandler;
+const express = require("express");
+const app = express();
+const port = 3000;
+const requestHandler = require("./Controller/index.js").requestHandler;
 
 app.use(express.json());
-app.use(express.static(__dirname + '/../dist/'))
+app.use(express.static(__dirname + "/../dist/"));
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
-app.get('/openProductionList', requestHandler.openProductionList);
-app.get('/partsList/:id', requestHandler.partsList);
-app.post('/addNewProductionRun', requestHandler.addNewProductionRun);
-app.patch('/editLeadTime', requestHandler.editLeadTime);
-app.patch('/updateTotalLeadTime', requestHandler.updateTotalLeadTime);
-app.patch('/updateReceived', requestHandler.updateReceived);
-app.patch('/updateBool', requestHandler.updateBool);
+app.get("/openProductionList", requestHandler.openProductionList);
+app.get("/partsList/:id", requestHandler.partsList);
+app.post("/addNewProductionRun", requestHandler.addNewProductionRun);
+app.patch("/editLeadTime", requestHandler.editLeadTime);
+app.patch("/updateTotalLeadTime", requestHandler.updateTotalLeadTime);
+app.patch("/updateReceived", requestHandler.updateReceived);
+app.patch("/updateBool", requestHandler.updateBool);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+  console.log(`Application listening at http://localhost:${port}`);
+});
