@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import Part from "./Part.jsx";
-import sampleData from "../../../sampleData/sampleData.js";
 
 export default function ProductionItem({ item, getAll }) {
   const [expandButtonClicked, setExpandButtonClicked] = useState(false);
