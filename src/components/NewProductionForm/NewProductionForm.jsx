@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-class NewProduction extends React.Component {
+class NewProductionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,4 +120,4 @@ class NewProduction extends React.Component {
   }
 }
 
-export default NewProduction;
+export default NewProductionForm;
