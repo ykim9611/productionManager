@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 
 export default function NewProductionForm({ getAll }) {
@@ -104,3 +105,7 @@ export default function NewProductionForm({ getAll }) {
     </div>
   );
 }
+
+NewProductionForm.propTypes = {
+  getAll: PropTypes.func.isRequired,
+};
