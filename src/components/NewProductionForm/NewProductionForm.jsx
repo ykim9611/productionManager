@@ -1,123 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-class NewProductionForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      buttonClicked: false,
-      partsName: "",
-      leadTime: "",
-      parts: [],
-    };
-  }
+export default function NewProductionForm({ getAll }) {
+  const [newProductionButtonClicked, setNewProductionButtonClicked] =
+    useState(false);
+  const [productName, setProductName] = useState("");
+  const [partsName, setPartsName] = useState("");
+  const [leadTime, setLeadTime] = useState("");
+  const [annualSales, setAnnualSales] = useState("");
+  const [partsList, setPartsList] = useState([]);
 
-  buttonHandler() {
-    this.setState({
-      buttonClicked: true,
-    });
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  onAddClick(event) {
-    this.state.parts.push({
-      partsName: this.state.partsName,
-      leadTime: this.state.leadTime,
-    });
+  function addPartToList(event) {
     event.preventDefault();
-    this.setState({});
+    var partsListCopy = partsList;
+    partsListCopy.push({
+      partsName: partsName,
+      leadTime: leadTime,
+    });
+    setPartsList(partsListCopy);
+    setPartsName("");
+    setLeadTime("");
   }
 
-  onSubmitClick() {
+  function submitNewProductionRun() {
     event.preventDefault();
     axios
       .post("/addNewProductionRun", {
-        productName: this.state.productName,
-        annualSales: this.state.annualSales,
-        parts: this.state.parts,
+        productName: productName,
+        annualSales: annualSales,
+        parts: partsList,
       })
-      .then(() =>
-        this.setState({
-          buttonClicked: false,
-          productName: "",
-          annualSales: "",
-          partsName: "",
-          leadTime: "",
-          parts: [],
-        })
-      )
-      .then(() => this.props.getAll());
+      .then(() => {
+        setNewProductionButtonClicked(false);
+        setProductName("");
+        setPartsName("");
+        setLeadTime("");
+        setAnnualSales("");
+        setPartsList([]);
+      })
+      .then(() => getAll());
   }
 
-  render() {
-    return (
-      <div>
-        {this.state.buttonClicked ? (
-          <div>
-            <h3>Enter New Production Run</h3>
-            <form>
-              <div>
-                <label htmlFor="productName">Product Name : </label>
-                <input
-                  type="text"
-                  id="productName"
-                  name="productName"
-                  onChange={() => this.handleInputChange(event)}
-                />
-                <br />
-                <label htmlFor="annualSales">Annual Sales # : </label>
-                <input
-                  type="text"
-                  id="annualSales"
-                  name="annualSales"
-                  onChange={() => this.handleInputChange(event)}
-                />
-                <br />
-              </div>
-              <div>
-                Part Name:{" "}
-                <input
-                  type="text"
-                  id="partsName"
-                  name="partsName"
-                  onChange={() => this.handleInputChange(event)}
-                ></input>{" "}
-                Lead Time(days):{" "}
-                <input
-                  type="text"
-                  id="leadTime"
-                  name="leadTime"
-                  onChange={() => this.handleInputChange(event)}
-                ></input>
-                <button onClick={() => this.onAddClick(event)}>Add</button>
-              </div>
-              <div>
-                {this.state.parts.map((part) => (
-                  <div key={part.partsName}>
-                    Part Name: {part.partsName} {" | "} Lead Time:{" "}
-                    {part.leadTime} days
-                  </div>
-                ))}
-              </div>
-              <button onClick={() => this.onSubmitClick()}>Submit</button>
-            </form>
-          </div>
-        ) : (
-          <button onClick={() => this.buttonHandler()}>
-            New Production Run
-          </button>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {newProductionButtonClicked ? (
+        <div>
+          <h3>Enter New Production Run</h3>
+          <form>
+            <div>
+              <label htmlFor="productName">Product Name : </label>
+              <input
+                type="text"
+                id="productName"
+                name="productName"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+              />
+              <br />
+              <label htmlFor="annualSales">Annual Sales # : </label>
+              <input
+                type="text"
+                id="annualSales"
+                name="annualSales"
+                value={annualSales}
+                onChange={(e) => setAnnualSales(e.target.value)}
+              />
+              <br />
+            </div>
+            <div>
+              Part Name:{" "}
+              <input
+                type="text"
+                id="partsName"
+                value={partsName}
+                onChange={(e) => setPartsName(e.target.value)}
+              ></input>{" "}
+              Lead Time(days):{" "}
+              <input
+                type="text"
+                id="leadTime"
+                name="leadTime"
+                value={leadTime}
+                onChange={(e) => setLeadTime(e.target.value)}
+              ></input>
+              <button onClick={addPartToList}>Add</button>
+            </div>
+            <div>
+              {partsList.map((part) => (
+                <div key={part.partsName}>
+                  Part Name: {part.partsName} {" | "} Lead Time: {part.leadTime}{" "}
+                  days
+                </div>
+              ))}
+            </div>
+            <button onClick={submitNewProductionRun}>Submit</button>
+          </form>
+        </div>
+      ) : (
+        <button onClick={setNewProductionButtonClicked}>
+          New Production Run
+        </button>
+      )}
+    </div>
+  );
 }
-
-export default NewProductionForm;
