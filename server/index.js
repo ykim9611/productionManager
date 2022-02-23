@@ -20,6 +20,7 @@ app.patch("/updateTotalLeadTime", requestHandler.updateTotalLeadTime);
 app.patch("/updateReceived", requestHandler.updateReceived);
 app.patch("/updateBool", requestHandler.updateBool);
 
-app.listen(port, () => {
-  console.log(`Application listening at http://localhost:${port}`);
+app.listen(port, (err) => {
+  if (err) console.log("Error in server setup");
+  console.log(`Server listening at http://localhost:${port}`);
 });
