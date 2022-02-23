@@ -3,7 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import NewPart from "./NewPart.jsx";
-import sampleData from "../../sampleData/sampleData.js";
+import sampleData from "../../../sampleData/sampleData.js";
 
 class OpenProduction extends React.Component {
   constructor(props) {
