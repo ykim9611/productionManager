@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import PropTypes from 'prop-types';
-import UpcomingProduction from '../UpcomingProduction/UpcomingProduction.jsx';
+import UpcomingProduction from './UpcomingProduction.jsx';
 
 const UpcomingProductionList = ({ list }) => (
   <ul>
