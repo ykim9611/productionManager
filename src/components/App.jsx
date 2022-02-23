@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import styles from "./styles.css";
-import axios from "axios";
-import NewProductionForm from "./NewProductionForm/NewProductionForm.jsx";
-import ProductionList from "./ProductionList/ProductionList.jsx";
-import UpcomingProductionList from "./UpcomingProductionList/UpcomingProductionList.jsx";
+import Home from "./Home/Home.jsx";
+import Production from "./Production/Production.jsx";
 
 export default function App() {
-  const [openProductionList, setOpenProductionList] = useState([]);
-  const [upcomingProductionList, setUpcomingProductionList] = useState([]);
-
-  useEffect(() => {
-    getOpenProductionList();
-  }, []);
-
-  function getOpenProductionList() {
-    axios.get("/openProductionList").then(({ data }) => {
-      setOpenProductionList(data);
-    });
-  }
   return (
-    <div className={styles.titleSection}>
-      <h1>Production Manager</h1>
-      <NewProductionForm getAll={getOpenProductionList} />
-      <ProductionList
-        list={openProductionList}
-        getAll={getOpenProductionList}
-      />
-      <UpcomingProductionList list={upcomingProductionList} />
+    <div>
+      <div className={styles.topNav}>
+        <h1>Production Manager</h1>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/production">Production Runs</Link>
+        </nav>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="production" element={<Production />} />
+      </Routes>
     </div>
   );
 }
