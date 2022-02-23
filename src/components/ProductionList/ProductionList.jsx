@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-key */
 import React from "react";
 import PropTypes from "prop-types";
-import OpenProduction from "./OpenProduction.jsx";
+import ProductionItem from "./ProductionItem.jsx";
 
-const OpenProductionList = ({ list, getAll }) => (
+const ProductionList = ({ list, getAll }) => (
   <div>
     <h2>
       Open Production Runs
@@ -12,7 +12,7 @@ const OpenProductionList = ({ list, getAll }) => (
     <div>
       {list.map((item) =>
         item.openBool === 1 ? (
-          <OpenProduction
+          <ProductionItem
             key={item.id.toString()}
             item={item}
             getAll={getAll}
@@ -24,7 +24,7 @@ const OpenProductionList = ({ list, getAll }) => (
     <div>
       {list.map((item) =>
         item.openBool === 0 ? (
-          <OpenProduction
+          <ProductionItem
             key={item.id.toString()}
             item={item}
             getAll={getAll}
@@ -35,8 +35,9 @@ const OpenProductionList = ({ list, getAll }) => (
   </div>
 );
 
-// OpenProductionList.propTypes = {
-//   list: PropTypes.arrayOf(PropTypes.number)
-// }
+ProductionList.propTypes = {
+  list: PropTypes.array.isRequired,
+  getAll: PropTypes.func.isRequired,
+};
 
-export default OpenProductionList;
+export default ProductionList;

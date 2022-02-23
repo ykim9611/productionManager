@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.css";
 import axios from "axios";
 import NewProductionForm from "./NewProductionForm/NewProductionForm.jsx";
-import OpenProductionList from "./ProductionList/OpenProductionList.jsx";
+import ProductionList from "./ProductionList/ProductionList.jsx";
 import UpcomingProductionList from "./UpcomingProductionList/UpcomingProductionList.jsx";
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
     <div className={styles.titleSection}>
       <h1>Production Manager</h1>
       <NewProductionForm getAll={getOpenProductionList} />
-      <OpenProductionList
+      <ProductionList
         list={openProductionList}
         getAll={getOpenProductionList}
       />

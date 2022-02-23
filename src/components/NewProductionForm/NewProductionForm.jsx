@@ -104,3 +104,7 @@ export default function NewProductionForm({ getAll }) {
     </div>
   );
 }
+
+NewProductionForm.propTypes = {
+  getAll: PropTypes.func.isRequired,
+};
